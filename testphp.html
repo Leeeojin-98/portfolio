@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta charset="UTF-8"> 
+        <title>TEST</title> 
+        <meta name="viewport" content="width=device-width, initial-scale=1"><!-- 모바일 디바이스 설정 --> 
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"> 
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script><!--제이쿼리 연결 --> 
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script><!-- 제이쿼리모바일 연결 --> 
+        <script src="cordova.js"></script>
+        	<script type="text/javascript">
+	function formCheck() {
+
+window.location.replace('testphp.html');
+	}
+	</script>
+<style>
+   li { list-style:none; }
+  .picture { list-style:none; padding:0; margin:0; }
+  .picture li { float:left; width:50%;}
+  .picture li a {display:block; margin:5px; border: 1px }
+  .picture li img { display:block; width:50%;  height:auto;}
+  .picture li img:hover { display:block; width:100%;  height:auto;}
+</style>        
+    </head> 
+    <body> 
+<section id="home" data-role="page">
+    <div style="overflow: hidden;" data-role="header">
+        <h1>Test</h1>
+        <div data-role="navbar" style="text-align:center">
+            <ul>
+                <li><a href="#insert">insert</a></li>
+                <li><a href="#Select">Select</a></li>
+                <li><a href="#Update">Update</a></li>
+                <li><a href="#Delete">Delete</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+    
+		<div data-role="footer" data-position="fixed">
+			<h1>이어진</h1>
+		</div><!-- /footer -->
+</section>
+ 
+<section id="insert" data-role="page">
+    <div style="overflow: hidden;" data-role="header">
+        <a href="#home" data-icon="arrow-l" data-direction="reverse">처음</a>
+        <h1>Insert</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#insert" class="ui-btn-active ui-state-persist">insert</a></li>
+                <li><a href="#Select">Select</a></li>
+                <li><a href="#Update">Update</a></li>
+                <li><a href="#Delete">Delete</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+    <div class="content" data-role="content">
+        <form action="testinsert.php" method="post">
+            Email: <input type="text" name="email">
+            Name: <input type="text" name="name">
+            Age: <input type="number" name="age">
+            Phone: <input type="text" name="phone">
+            <button href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-r ui-btn-icon-right"
+			onclick="formCheck()">추가</button>        
+        </form>
+    </div>
+		<div data-role="footer" data-position="fixed">
+			<h1>이어진</h1>
+		</div><!-- /footer -->
+</section>
+        
+<section id="Select" data-role="page">
+    <div style="overflow: hidden;" data-role="header">
+        <a href="#home" data-icon="arrow-l" data-direction="reverse">처음</a>
+        <h1>Select</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#insert">insert</a></li>
+                <li><a href="#Select" class="ui-btn-active ui-state-persist" rel="external">Select</a></li>
+                <li><a href="#Update">Update</a></li>
+                <li><a href="#Delete">Delete</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+    <div class="content" data-role="content">
+         <table border = "1">
+      <thead>
+        <tr>
+          <th style = "font-size:25px;"><b>이메일</b></th>
+          <th style = "font-size:25px;"><b>이름</b></th>
+          <th style = "font-size:25px;"><b>나이</b></th>
+          <th style = "font-size:25px;"><b>전화번호</b></th>          
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $conn = mysqli_connect( 'localhost', '아이디', '비밀번호', 'DB이름' );
+          $sql = "SELECT * FROM 테이블이";
+          $result = mysqli_query( $conn, $sql );
+          while( $row = mysqli_fetch_array( $result ) ) {
+            echo 
+        '<tr>
+            <td>' . $row[ 'email' ] . '</td>
+            <td>'. $row[ 'name' ] . '</td>
+            <td>' . $row[ 'age' ] . '</td>
+            <td>' . $row[ 'phone' ] . '</td>
+        </tr>';
+          }
+        ?>
+      </tbody>
+    </table>
+            <a href="testselect.php" data-role="button" rel="external">Select</a>
+    </div>
+    
+		<div data-role="footer" data-position="fixed">
+			<h1>이어진</h1>
+		</div><!-- /footer -->
+</section>
+        
+<section id="Update" data-role="page">
+    <div style="overflow: hidden;" data-role="header">
+        <a href="#home" data-icon="arrow-l" data-direction="reverse">처음</a>
+        <h1>Update</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#insert">insert</a></li>
+                <li><a href="#Select">Select</a></li>
+                <li><a href="#Update" class="ui-btn-active ui-state-persist">Update</a></li>
+                <li><a href="#Delete">Delete</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+    <div class="content" data-role="content">
+          <form action="testupdate.php" method="post">
+            Email: <input type="text" name="email">
+            Name: <input type="text" name="name">
+            Age: <input type="number" name="age">
+            Phone: <input type="text" name="phone">
+            <button href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-r ui-btn-icon-right"
+			onclick="formCheck()" >수정</button>
+        </form>      
+    </div>
+    
+		<div data-role="footer" data-position="fixed">
+			<h1>이어진</h1>
+		</div><!-- /footer -->
+</section>
+        
+<section id="Delete" data-role="page">
+    <div style="overflow: hidden;" data-role="header">
+        <a href="#home" data-icon="arrow-l" data-direction="reverse">처음</a>
+        <h1>Delect</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#insert">insert</a></li>
+                <li><a href="#Select">Select</a></li>
+                <li><a href="#Update">Update</a></li>
+                <li><a href="#Delete" class="ui-btn-active ui-state-persist">Delete</a></li>
+            </ul>
+        </div><!-- /navbar -->
+    </div><!-- /header -->
+    <div class="content" data-role="content">
+        <form action="testdelete.php" method="post">
+            Email: <input type="text" name="email">
+            <button href="#home" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-r ui-btn-icon-right"
+			onclick="formCheck()" >삭제</button>
+        </form>   
+    </div>
+    
+		<div data-role="footer" data-position="fixed">
+			<h1>이어진</h1>
+		</div><!-- /footer -->
+</section>
+ 
+</body>
+</html>
